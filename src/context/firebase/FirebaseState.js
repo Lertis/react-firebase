@@ -4,7 +4,7 @@ import { FirebaseContext } from './firebaseContext'
 import { firebaseReducer } from './firebaseReducer'
 import { ADD_NOTE, FETCH_NOTES, REMOVE_NOTE, SHOW_LOADER } from '../types'
 
-const url = process.env.REACT_APP_DB_URL
+const url = 'https://react-firebase-hooks-b8e4f.firebaseio.com'
 
 export const FirebaseState = ({ children }) => {
 	const initialState = {
@@ -17,9 +17,7 @@ export const FirebaseState = ({ children }) => {
 
 	const fetchNotes = async () => {
 		showLoader()
-		const res = await axios.get('https://react-firebase-hooks-b8e4f.firebaseio.com', {
-			headers: {"Access-Control-Allow-Origin": "*"}
-		})
+		const res = await axios.get(`${url}/notes.json`)
 
 		const payload = Object.keys(res.data).map(key => {
 			return {
