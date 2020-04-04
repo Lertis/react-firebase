@@ -1,7 +1,7 @@
 import React, { useReducer, useEffect } from 'react'
 import { AlertContext } from './alertContext'
 import { alertReducer } from './alertReducer'
-import { HIDE_ALERT, SHOW_ALERT } from '../types'
+import { HIDE_ALERT, SHOW_ALERT, CLEAR_ALERT } from '../types'
 
 export const AlertState = ({ children }) => {
 	const [state, dispatch] = useReducer(alertReducer, { visible: false })
@@ -9,8 +9,10 @@ export const AlertState = ({ children }) => {
 	useEffect(() => {
 		if (state.text) {
 			setTimeout(() => {
-				hide()
-			}, 5000)
+				dispatch({
+					type: CLEAR_ALERT
+				})
+			}, 3700)
 		}
 	}, [state])
 
